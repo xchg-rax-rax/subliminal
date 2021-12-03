@@ -1,0 +1,96 @@
+Project Direction 
+=================
+
+Last updated: 07/09/21
+
+
+Summary of Project Goals
+-----------------------
+
+Subliminal at this time [07/09/21] is a very simple project, the germ of a larger idea that I wish to pursue to fruition.
+I am a fanatic believer in the potential of automation in cybersecurity and my intention for this project is for subliminal is that it will become a framework and a work bench that I can use to explore this potential
+The functionality up to this point has been primarily focused on the gathering of raw data on targets from both open sources and from the targets publicly facing systems, and anticipate the focus to remain this for some time to come.
+After however a certain critical mass of input data types have been established a new part of the developmental process will begin.
+I fundamentally consider the project to have 5 key aspects in it's developmental process:
+
+    1. Data acquisition : The gathering of raw data on targets form any and all available sources
+    2. Data Parsing : The conversion of this raw unstructured data into, structured data suitable and amenable for further processing
+    3. Data Interpretation : The use of traditional algorithms and ML solutions to extract useful intelligence from this structured data
+    4. Intelligent Action : Via either algorithmic, RL or other techniques choose additional data acquisition actions to take so as to further expand the enumerated attack surface
+    5. Interface & Presentation : Provide an easily interpretable UI that allows users to direct the intelligence gathering process and view it's results in both cases to an arbitrary degree of granularity 
+
+These aspects have are related by the way that information will flow through the fully realized system
+
+                                                   __________________________
+                                                  /                          \
+                                                  | Interface & Presentation |
+                                                  \__________________________/
+                                                      ^    ^         ^   ^
+                               _______________________|    |         |   |______________________________
+                              |                        ____|         |_________                         |
+                      ________|_________      ________|_______      ___________|_________      _________|__________
+                     /                  \    /                \    /                     \    /                    \
+    { the world }--->| Data Acquisition |--->|  Data Parsing  |--->| Data Interpretation |--->| Intelligent Action |
+                     \__________________/    \________________/    \_____________________/    \____________________/
+                              ^                                                                         |
+                              |                                                                         |
+                              |                                                                         |
+                              |_________________________________________________________________________|
+    
+            Figure 1. Schematic representation of information flow between the 5 aspects of the fully realized system 
+
+[A possible 6th developmental aspect not given here is Security, which is of vital importance and pervades each of the other 5 steps.]
+
+The essential kernel around which the system is conceived is that essentially as follows:
+
+    - All the processes that an analyst performs in the enumeration stage of attack cycle are simple tasks that can be trivially executed in an automated fashion.
+    - The role of the analyst is to take those results and using their intelligence and experience, direct the intelligence gathering process by selecting additional target of investigation.
+    - This stage of the automation can also be (either partially or completely) automated via the use of an ensemble of algorithmic and ML techniques to emulate the domain specific intelligence of the analyst. 
+
+The goal of this project should be considered to test the hypothesis that this kernel contains. 
+Specifically that the domain specific cognitive tasks that the analyst performs in order to direct the information gathering process can be either wholly or partially replaced by a automated system realizing the same functionality.
+
+## Additional Hypothesise Here
+
+Development Pathway
+-------------------
+
+In this section I will seek to provide an outline of how I conceive the way in which projects development will advance.
+I will not provide a specific time line or anything of that sort as I have found via experience that such timelines preemptively made from the naive position one is in at the beginning of a project to be both unhelpful and misleading.
+Instead I will provide a high level over view of the approximate sequence in which I envisage the 5 key aspects outlined in the summary to proceed.
+
+The course I see for the project has 3 main stages
+    
+    1. The MVP + POC Stage
+    2. Core feature development 
+    3. Enhancement and Maintenance   
+
+I will now give a description of each of these 3 stages 
+
+    1 - The MVP + POC Stage
+    ------------------------
+
+    This is the stage that the project finds itself in and the one which will likely be most challenging.
+    The primary purpose of this stage is validate the core hypotheses which need to be show to be true for development to continue.
+    This will be done by building out a light weight, bear bones version of the project but one that realizes each of the 5 key aspects in a meaningful way.
+    The goal will also be to show that the project as a whole is able to sustain itself financially by offering products/services which potential customers are willing to pay for, in the form of a simple subscription based web tool for OSINT/Web recon and various API's that provide access to any non public data we gather in the course of the development as well as an script friendly interface to our tools (much like similar services in the space do).
+    The very first stage, already largely completed, is too building a provisional UI to visualize the out put of the backed. 
+    This UI will never be used in production but merely servers way of advancing the backed development and of experimenting with different methods of presenting it's out put.
+    Having been mostly established the work has now moved primarily to the 2nd stage of the processes which is the development of various data acquisition methods, or scans as we have taken to refer to them as.
+    They source, generally, raw unstructured data from either public sources or the output of other programs and store it in a NoSQL database ready to be displayed via the UI.
+    Before advancing to the next stage of development around 7-10 different scans need to be implemented, the entire code base up to this point needs to be refactored (for modularity and maintainability), a robust set of unit tests need to be put in place, version control needs to be put in place and potentially so does some form of automated testing.
+    This intermediate stage is crucial to assure that the project has a consistent, expandable and maintainability architecture as well as to assure that software engineering best practices are adhered to moving forward.
+    The next stage will be to take all of the outputs of these scans and develop robust parsing algorithms that can be used to convert their output into structured data.
+    After this stage I should return to UI development and convert the rough UI into a slightly more polished, yet still highly provisional, version focusing on the interpretable presentation of scan results.
+    It is here that the gathering of large datasets and the authorship of custom APIs should be considered, as well as any further scans that could be added.
+    Before moving beyond the Data enumeration and parsing aspects it we should be certain that a large enough pool of data can be sourced by the program to perform useful work in the subsequent stages.
+    This stage may take a significant amount of time and will likely only end after the launch of the MVP, an online tool for recon, OSINT and enumeration along with an extensive API to vacillate those tasks
+
+    2 - Core feature Development
+    ----------------------------
+
+    With the MVP done and some of the base assumptions proved we will proceed to the 2 stage of development in which the really difficult portions of the project will be realized and the most speculative of our assumptions tested.
+    This stage is focused on the pair goals of data interpretation, the generation of intelligence, and intelligent action, using the intelligence and structured data we have gathered to direct the data gathering process forward. 
+
+Architecture
+------------ 

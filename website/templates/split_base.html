@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+    <h3 align="center">{% block heading %}{% endblock %}</h3>
+    <div class="row">
+        <div class="col">
+            {% block content_left %}
+            {% endblock %}
+        </div>
+        <div class="col">
+            {% block content_right %}
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}

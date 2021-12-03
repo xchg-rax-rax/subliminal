@@ -1,0 +1,85 @@
+{% extends "dashboard_base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content_left %}
+    <div class="card" style="min-height:30em;">
+        <h3 align="center" class="card-title">{{ case['case_name'] }}</h3>
+        <div class="card-body">
+            <p class="card-text">Tags: 
+            {% for tag in case['tags'] %}
+                <div class="badge badge-primary">{{tag}}</div>
+            {% endfor %}
+            </p>
+            <p class="card-text">Scans: {{ case['scans']|length }}</p>
+            <p class="card-text">Created: {{ case['created'] }}</p>
+            <p class="card-text">Summary: {{ case['summary'] }}</p>
+            <form action="/create_scan"  method="GET">
+                <input type="hidden" name="case_id" value="{{case['_id']}}" />
+                <button type="submit" class="btn btn-primary">Create Scan</button>
+            </form>
+            <a href="/case_delete/{{case['_id']}}" class="btn btn-danger">Delete Case</a>
+        </div>
+    </div>
+{% endblock %}
+{% block content_right %}
+    <div id="accordian">
+    {% for scan in case['scans'] %}
+        <div class="card">
+            <div class="card-header">
+                <span class="mb-0" id="heading-{{loop.index}}">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapse-{{loop.index}}" aria-expanded="true" arai-controls="collapse-{{loop.index}}">
+                        {{scan['scan_name']}}{% if 'duplicate' in scan and scan['duplicate'] > 0 %} - {{scan['duplicate']}}{% endif %}
+                    </button>
+                </span>
+                <span> Type: 
+                    {% if scan['scan_type'] == 0 %}
+                        Subdomain 
+                    {% elif scan['scan_type'] == 1 %}
+                        Domain/IP OSINT
+                    {% elif scan['scan_type'] == 2 %}
+                        HTTP Screenshot
+                    {% elif scan['scan_type'] == 3 %}
+                        IP Range
+                    {% endif %}
+                </span>
+                {% if scan['status'] == 0 %}
+                    <div class="badge badge-primary">Ready</div>
+                {% elif scan['status'] == 1 %}
+                    <div class="badge badge-warning">In Progress</div>
+                {% elif scan['status'] == 2 %}
+                    <div class="badge badge-success">Finished</div>
+                {% elif scan['status'] == 3 %}
+                    <div class="badge badge-danger">Failed</div>
+                {% endif %}
+            </div>
+            <div id="collapse-{{loop.index}}" class="collapse" aria-labelledby="heading-{{loop.index}}" data-parent="#accordion">
+                <div class="card-body">
+                    <p>{{scan['settings']}}</p>
+                    <p>{{scan['scope']}}</p>
+                    {% if scan['scan_type'] == 0 %}
+                    {% elif scan['scan_type'] == 1 %}
+                    {% elif scan['scan_type'] == 2 %}
+                    {% elif scan['scan_type'] == 3 %}
+                    {% endif %}
+                </div>
+                <a href="/scan_delete/{{scan['_id']}}" class="btn btn-danger">Delete Scan</a>
+                <a href="/scan_copy/{{scan['_id']}}" class="btn btn-info">Copy Scan</a>
+                {% if scan['status'] == 0 or scan['status'] == 3 %}
+                    <a href="/scan_start/{{scan['_id']}}" class="btn btn-success">Start Scan</a>
+                {% elif scan['status'] == 1 %}
+                    <!--- convert to stop maybe? -->
+                    <a href="#" class="btn btn-warning">In Progress</a>
+                {% elif scan['status'] == 2 %}
+                    <a href="/scan_results/{{scan['_id']}}" class="btn btn-primary">View Results</a>
+                {% elif scan['status'] == 2 %}
+                    <a href="/scan_results/{{scan['_id']}}" class="btn btn-primary">View Results</a>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}
+{% block scripts %}
+    <script type="text/javascript">
+        $.ajax({type: "GET",url: "/case_status/", success: updateScanStatus(result)});
+    </script>
+{% endblock %}

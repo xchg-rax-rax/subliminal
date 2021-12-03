@@ -1,0 +1,11 @@
+app.cord.tech
+flair.cord.tech
+docs.cord.tech
+www.cord.tech
+cord.tech
+api.cord.tech
+message-api.cord.tech
+staging.cord.tech
+aws-platform.cord.tech
+cord.tech
+cord.tech

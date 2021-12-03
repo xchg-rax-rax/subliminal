@@ -1,0 +1,26 @@
+To Do
+=====
+
+- Visual 
+    - Create proper Dashboard with stats, case list etc (very similar to case page)
+        - Do a tutoiral on making a dash board in boostrap
+    - Add pretty formatting to scan details drop down 
+    - Improve styling of Scan list (maybe put into it's on frame?)
+    - Style scan results page
+    - Work out how to change boostrap colour theme and implement dark mode
+
+- Functional
+    1 Add extra scope checks for each scan type plus js to indicate permissible scans
+    - Add js/ajax + backend endpoint to check for scan status and reload page when appropriate 
+    2 Implement Scans
+        - nmap scanning
+        - Domain/IP OSINT
+            - Recursive Feature (what even the hell is this?)
+       - IP Range
+            - Port Scanning
+                - Add advanced options
+                - Add nmap version
+       - Reimplement results page
+            - Summary of results (should be generated on completion)
+            - Individual Result formatting for each scan type
+    - Add "are you sure?" warnings for scan/case deleting 

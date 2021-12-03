@@ -1,0 +1,14 @@
+{% extends "dashboard_base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content_left %}
+
+{% endblock %}
+{% block content_right %}
+    <!-- Temporary Solution to facilitate navigation during development -->
+    <ul>
+        {% for case in cases %}
+            <li><a href="/case/{{case._id}}">{{case.case_name}}</a></li>
+        {% endfor %}
+    </ul>
+    <a href="/create_case">CREATE CASE</a>
+{% endblock %}

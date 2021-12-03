@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Create Case{% endblock %}
+{% block content %}
+    <form method="POST">
+        <h3 align="center">Create Case</h3>
+        <div class="form-group">
+            <label for="case_name">Case Name</label>
+            <input type="case_name" class="form-control" id="case_name" name="case_name" placeholder="Example Case" />
+        </div>
+        <div class="form-group">
+            <label for="tags">Tags </label>
+            <input type="tags" class="form-control" id="tags" name="tags" placeholder="tag1,tag2,..." />
+        </div>
+        <div class="form-group">
+            <label for="summary">Case Summary</label>
+            <textarea class="form-control" id="summary" name="summary" placeholder="Example Case Summary..." style="min-height: 10em"></textarea>
+        </div>
+        <br />
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+{% endblock %}

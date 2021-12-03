@@ -1,0 +1,29 @@
+{% extends "dashboard_base.html" %}
+{% block title %}Scan Results : {{scan['scan_name']}}{% endblock %}
+{% block content_left %}
+Some Prettiness will go here
+{% endblock %}
+{% block content_right %}
+    <h3 align="center">Artefacts</h3>
+    {% for artefact in artefacts %}
+        <pre>
+            <code>{{artefact['raw_content']}}</code>
+            <code>{{artefact['parsed_content']}}</code>
+        </pre>
+        {% if scan['scan_type'] == 0 %}
+            <pre>
+                <code>
+{% for subdomain in artefact['raw_content'][1] %}{{subdomain}}<br />{% endfor %}
+                </code>
+            </pre>
+        {% elif scan['scan_type'] == 1 %}
+            {% if artefact['artefact_type'] == "whois"%}
+            <pre>
+                <code>{%for line in artefact['raw_content'][1]%}{{line}}<br />{% endfor %}</code>
+            </pre>
+            {% endif %}
+        {% elif scan['scan_type'] == 2 %}
+            <img src='{{url_for('static',filename=artefact['parsed_content']['path'][17:])}}' style="width:100%" />
+        {% endif %}
+    {% endfor %}
+{% endblock %}

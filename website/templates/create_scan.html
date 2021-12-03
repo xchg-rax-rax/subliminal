@@ -1,0 +1,112 @@
+{% extends "split_base.html" %}
+{% block title %}Create Scan{% endblock %}
+{% block heading %}Create Scan{% endblock %}
+{% block content_left %}
+    <form method="POST">
+        <nav>
+            <div class="nav nav-tabs" id ="nav-tab" role="tablist">
+                <a class="nav-link active" id="nav-subdomain-tab" data-toggle="tab" href="#nav-subdomain" aria-controls="nav-subdomain" aria-selected="true" onclick="updateScanType(0)">Subdomain Scan</a>
+                <a class="nav-link" id="nav-domainip-tab" data-toggle="tab" href="#nav-domainip" aria-controls="nav-domainip" aria-selected="false" onclick="updateScanType(1)">Domain/IP OSINT</a>
+                <a class="nav-link" id="nav-screenshot-tab" data-toggle="tab" href="#nav-screenshot" aria-controls="nav-screenshot" aria-selected="false" onclick="updateScanType(2)">HTTP Screenshot</a>
+                <a class="nav-link" id="nav-iprange-tab" data-toggle="tab" href="#nav-iprange" aria-controls="nav-iprange" aria-selected="false" onclick="updateScanType(3)">IP Range Scan</a>
+            </div>
+        </nav>
+        <!-- Hidden field to indicate scan type based on active tab -->
+        <input type="hidden" id="scan_type" name="scan_type" value="0" />
+        <!-- Hidden field to store the case_id passed via GET method to the page -->
+        <input type="hidden" id="case_id" name="case_id" value="{{case_id}}" />
+        <div class="tab-content" id="nav-tabContent">
+            <!-- Subdomain Enumeration Scan - Type 0 -->
+            <div class="tab-pane fade show active" id="nav-subdomain" role="tabpannel" aria-labelledby="nav-subdomain-tab">
+                <div class="form-group">
+                    <label for="scan_length">Scan Length</label>
+                    <select class="form-control" id="scan_length" name="scan_length" >
+                        <option value="short">Short</option>
+                        <option value="long">Long</option>
+                        <option value="brute">Brute-Force</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="threads">Number of Threads</label>
+                    <input type="text" class="form-control" id="threads" name="threads" placeholder="1-999" />
+                </div>
+            </div>
+            <!-- Domain/IP OSINT Scan - Type 1 -->
+            <div class="tab-pane fade " id="nav-domainip" role="tabpannel" aria-labelledby="nav-domainip-tab">
+                <div class="form-group">
+                    <p>OSINT Types</p>
+                    <label>
+                        <input type="checkbox" id="whois" name="whois" value="whois" />
+                        Whois
+                    </label>
+                    <br />
+                    <label>
+                        <input type="checkbox" id="rev-dns" name="rev-dns" value="rev-dns" />
+                        Reverse DNS 
+                    </label>
+                    <br />
+                    <label>
+                        <input type="checkbox" id="dns-history" name="dns-history" value="dns-history" />
+                        DNS History 
+                    </label>
+                    <br />
+                </div>
+                <!--
+                <hr />
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="recursive" name="recursive" value="recursive" />
+                        Recursive
+                    </label>
+                    <br />
+                </div>
+                -->
+            </div>
+            <!-- HTTP Screenshot - Type 2 -->
+            <div class="tab-pane fade " id="nav-screenshot" role="tabpannel" aria-labelledby="nav-screenshot">
+                <div class="form-group">
+                    <label for="http-ports">Ports</label>
+                    <input type="text" class="form-control" id="http-ports" name="http-ports" value="80,443" />
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="host-check" name="host-check" value="whois" />
+                        Check hosts are live? 
+                    </label>
+                </div>
+            </div>
+            <!-- IP range scan - Type 3 -->
+            <div class="tab-pane fade " id="nav-iprange" role="tabpannel" aria-labelledby="nav-iprange">
+                <div class="form-group">
+                    <label>
+                        <input type="radio" "host-detection" name="ip-range-scans" value="host-detection" checked/>
+                        ICMP Host Detection
+                    </label>
+                    <br />
+                    <label>
+                        <input type="radio" id="port-scanning" name="ip-range-scans" value="port-scanning" />
+                        Port Scanning
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="ports">Ports (default: top 1000 ports)</label>
+                    <input type="text" class="form-control" id="ports" name="ports" placeholder="80,443,..." />
+                </div>
+                <div class="form-group">
+                    <a href="https://www.countryipblocks.net/acl.php">If you wish to scan all the IP ranges of a country they can be generated using this site.</a>
+                </div>
+            </div>
+        <hr />
+        <div class="form-group">
+            <label for="scan-name">Scan Name</label>
+            <input type="text" class="form-control" id="scan-name" name="scan-name" placeholder="Example Scan" />
+        </div>
+        </div>
+{% endblock %}
+    {% block content_right %}
+        <h3 align="center">Scope</h3>
+        <textarea id="scope" name="scope" class="form-contorl" style="min-width: 100%; min-height: 20em"></textarea>
+        <br />
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+{% endblock %}
