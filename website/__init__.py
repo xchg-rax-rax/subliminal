@@ -5,7 +5,6 @@ from os import path
 from bson import ObjectId
 from .Database import Database
 
-# This is some fucked up spaghetti code bullshit, honestly, Jesus, jumping Jesus on a pogo stick
 class User(UserMixin):
     def __init__(self, user):
         self.id = str(user['_id'])
@@ -52,7 +51,6 @@ def create_app():
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
-    # fuckery alter!
     @login_manager.user_loader
     def load_user(id):
         return User(db.read_user(user_id=ObjectId(id)))

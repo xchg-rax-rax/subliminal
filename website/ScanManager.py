@@ -1,4 +1,3 @@
-# THIS SHIT BE BRIMMING WITH POTENTIAL CODE INJECTION VULNERABILITIES 
 import threading 
 import re
 import os
