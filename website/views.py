@@ -107,8 +107,6 @@ def create_scan():
         return render_template("create_scan.html", user=current_user, case_id=case_id)
 """
 def process_scan_form(form:dict, case_id:ObjectId):
-    # DON'T KNOW WHERE BUT SOMEWHERE IN IN HERE HACKER'S GONNA COME FOR YOU KNECAPS
-    # add more length checks up in this bitch <------------
     if not preprocess_form(form, case_id):
         return False
     # choose appropriate scan_type 
